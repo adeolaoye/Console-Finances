@@ -92,4 +92,50 @@ var finances = [
 
 var numberOfMonths = finances.length
 
-console.log(numberOfMonths)
+
+// Net Profit/Losses over entire period
+
+let netProfitLoss = 0;
+
+for (let i=0; i < finances.length; i++) {
+  netProfitLoss += finances[i][1]
+}
+
+// average profit/loss over entire period
+
+let totalChangesBetweenMonths = 0;
+
+for (let i=1; i < finances.length; i++) {
+  totalChangesBetweenMonths += finances[i][1] - finances[i - 1][1]
+}
+
+let averageChange = totalChangesBetweenMonths / (finances.length - 1)
+
+// Greatest increase in profit/loss date and amount
+
+let maxIncrement = finances[0];
+
+for (let i=1; i < finances.length; i++) {
+    if (finances[i][1] - finances[i - 1][1] > maxIncrement[1]) {
+      maxIncrement = finances[i]
+    }
+}
+
+
+// Greatest decrease in profit/loss
+
+let maxDecrement = finances[0] 
+
+for (let i=1; i < finances.length; i++) {
+  if (finances[i][1]- finances[i - 1][1] < maxDecrement[1]) {
+    maxDecrement = finances[i]
+  }
+}
+
+console.log("Financial Analysis")
+console.log("------------------")
+console.log("Total Months: " + numberOfMonths)
+console.log("Total: $" + netProfitLoss)
+console.log("Average Change: $" + averageChange)
+console.log("Greatest increase in profit/loss: " + maxIncrement)
+console.log("Greatest decrease in profit/loss: " + maxDecrement)
