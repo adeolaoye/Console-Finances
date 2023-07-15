@@ -90,6 +90,7 @@ var finances = [
 
 //  total number of months
 
+
 var numberOfMonths = finances.length
 
 
@@ -113,29 +114,36 @@ let averageChange = totalChangesBetweenMonths / (finances.length - 1)
 
 // Greatest increase in profit/loss date and amount
 
-let maxIncrement = finances[0];
+let maxIncrement = 0;
+// initialize difference
+let maxMonth;
+// let maxIncrement = totalChangesBetweenMonths;
 
 for (let i=1; i < finances.length; i++) {
-    if (finances[i][1] - finances[i - 1][1] > maxIncrement[1]) {
-      maxIncrement = finances[i]
+    if (finances[i][1] - finances[i - 1][1] > maxIncrement) {
+      maxIncrement = finances[i][1] - finances[i -1][1]
+      maxMonth = finances[i][0]
     }
 }
 
 
 // Greatest decrease in profit/loss
-
-let maxDecrement = finances[0] 
+// initialize difference
+let maxDecrement = 0;
+let minMonth;
+// let maxIncrement = totalChangesBetweenMonths;
 
 for (let i=1; i < finances.length; i++) {
-  if (finances[i][1]- finances[i - 1][1] < maxDecrement[1]) {
-    maxDecrement = finances[i]
-  }
+    if (finances[i][1] - finances[i - 1][1] < maxDecrement) {
+      maxDecrement = finances[i][1] - finances[i -1][1]
+      minMonth = finances[i][0]
+    }
 }
 
 console.log("Financial Analysis")
 console.log("------------------")
 console.log("Total Months: " + numberOfMonths)
 console.log("Total: $" + netProfitLoss)
-console.log("Average Change: $" + averageChange)
-console.log("Greatest increase in profit/loss: " + maxIncrement)
-console.log("Greatest decrease in profit/loss: " + maxDecrement)
+console.log("Average Change: $" + averageChange.toFixed(2))
+console.log(`Greatest Increase in Profits/Losses:  ${maxMonth} ($${maxIncrement})`)
+console.log(`Greatest Decrease in Profits/Losses:  ${minMonth} ($${maxDecrement})`)
